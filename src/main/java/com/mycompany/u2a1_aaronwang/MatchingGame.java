@@ -532,15 +532,15 @@ public class MatchingGame extends javax.swing.JFrame{
     
     private void performUponWin() {
         numMatched = 0;
-        outputBox.setText("You win!");
-        playBTN.setText("Play Again");
+        outputBox.setText("You win! Play again?");
+        playBTN.setToolTipText(null);
         playBTN.setEnabled(true);
     }
     
     private void card1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card1ActionPerformed
         card1.setIcon(cardToIcon.get(card1));
         curCard = card1;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
 
@@ -549,7 +549,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card2ActionPerformed
         card2.setIcon(cardToIcon.get(card2));
         curCard = card2;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card2ActionPerformed
@@ -557,7 +557,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card3ActionPerformed
         card3.setIcon(cardToIcon.get(card3));
         curCard = card3;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card3ActionPerformed
@@ -565,7 +565,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card4ActionPerformed
         card4.setIcon(cardToIcon.get(card4));
         curCard = card4;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card4ActionPerformed
@@ -573,7 +573,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card5ActionPerformed
         card5.setIcon(cardToIcon.get(card5));
         curCard = card5;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card5ActionPerformed
@@ -581,7 +581,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card6ActionPerformed
         card6.setIcon(cardToIcon.get(card6));
         curCard = card6;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card6ActionPerformed
@@ -589,7 +589,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card7ActionPerformed
         card7.setIcon(cardToIcon.get(card7));
         curCard = card7;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card7ActionPerformed
@@ -597,7 +597,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card8ActionPerformed
         card8.setIcon(cardToIcon.get(card8));
         curCard = card8;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card8ActionPerformed
@@ -605,7 +605,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card9ActionPerformed
         card9.setIcon(cardToIcon.get(card9));
         curCard = card9;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card9ActionPerformed
@@ -613,7 +613,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card10ActionPerformed
         card10.setIcon(cardToIcon.get(card10));
         curCard = card10;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card10ActionPerformed
@@ -621,7 +621,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card11ActionPerformed
         card11.setIcon(cardToIcon.get(card11));
         curCard = card11;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card11ActionPerformed
@@ -629,7 +629,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card12ActionPerformed
         card12.setIcon(cardToIcon.get(card12));
         curCard = card12;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card12ActionPerformed
@@ -637,7 +637,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card13ActionPerformed
         card13.setIcon(cardToIcon.get(card13));
         curCard = card13;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card13ActionPerformed
@@ -645,7 +645,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card14ActionPerformed
         card14.setIcon(cardToIcon.get(card14));
         curCard = card14;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card14ActionPerformed
@@ -653,7 +653,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card15ActionPerformed
         card15.setIcon(cardToIcon.get(card15));
         curCard = card15;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card15ActionPerformed
@@ -661,7 +661,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card16ActionPerformed
         card16.setIcon(cardToIcon.get(card16));
         curCard = card16;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card16ActionPerformed
@@ -669,7 +669,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card17ActionPerformed
         card17.setIcon(cardToIcon.get(card17));
         curCard = card17;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card17ActionPerformed
@@ -677,7 +677,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card18ActionPerformed
         card18.setIcon(cardToIcon.get(card18));
         curCard = card18;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card18ActionPerformed
@@ -685,7 +685,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card19ActionPerformed
         card19.setIcon(cardToIcon.get(card19));
         curCard = card19;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card19ActionPerformed
@@ -693,7 +693,7 @@ public class MatchingGame extends javax.swing.JFrame{
     private void card20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card20ActionPerformed
         card20.setIcon(cardToIcon.get(card20));
         curCard = card20;
-        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
         cardFlip.setRepeats(false);
         cardFlip.start();
     }//GEN-LAST:event_card20ActionPerformed
