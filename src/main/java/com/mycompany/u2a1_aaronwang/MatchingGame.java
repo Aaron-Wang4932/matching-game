@@ -18,7 +18,7 @@ import java.util.Collections;
  *
  * @author peixi
  */
-public class MatchingGame extends javax.swing.JFrame implements ActionListener{
+public class MatchingGame extends javax.swing.JFrame{
     // ICONS:
     static final ImageIcon TITLE = new ImageIcon("resources/title.png");
     static final ImageIcon CARDBACK = new ImageIcon("resources/cardback.png");
@@ -38,9 +38,26 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
     // Hashmap, storing card to icon combos:
     static HashMap<JButton, ImageIcon> cardToIcon = new HashMap<>();
     
-    //Animation Timers:
-    Timer startingAnim = new Timer(75, this);
-    static int animCount = 0;
+    //Animation Timer:
+    ActionListener startingAnimListener = new ActionListener() {
+        int curCard = 0;
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            if(curCard == 20) {
+                startingAnim.stop();
+                outputBox.setText("Pick your first card!");
+                return;
+            }
+        outputBox.setText("Shuffling...");
+        cardList.get(curCard).setIcon(CARDBACK);
+        curCard++;
+        }
+    };
+    Timer startingAnim = new Timer(75, startingAnimListener);
+    // Card Flip Timer:
+    ActionListener cardFlipListener;
+    Timer cardFlip = new Timer(2000, cardFlipListener);
+    
     // Info:
     static ArrayList<JButton> chosenCards = new ArrayList<>();
     int numMatched = 0;
@@ -104,6 +121,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card1.setBackground(new java.awt.Color(255, 255, 255));
         card1.setEnabled(false);
+        card1.setFocusable(false);
         card1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card1ActionPerformed(evt);
@@ -112,6 +130,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card6.setBackground(new java.awt.Color(255, 255, 255));
         card6.setEnabled(false);
+        card6.setFocusable(false);
         card6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card6ActionPerformed(evt);
@@ -120,6 +139,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card11.setBackground(new java.awt.Color(255, 255, 255));
         card11.setEnabled(false);
+        card11.setFocusable(false);
         card11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card11ActionPerformed(evt);
@@ -128,6 +148,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card7.setBackground(new java.awt.Color(255, 255, 255));
         card7.setEnabled(false);
+        card7.setFocusable(false);
         card7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card7ActionPerformed(evt);
@@ -136,6 +157,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card16.setBackground(new java.awt.Color(255, 255, 255));
         card16.setEnabled(false);
+        card16.setFocusable(false);
         card16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card16ActionPerformed(evt);
@@ -144,6 +166,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card2.setBackground(new java.awt.Color(255, 255, 255));
         card2.setEnabled(false);
+        card2.setFocusable(false);
         card2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card2ActionPerformed(evt);
@@ -152,6 +175,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card12.setBackground(new java.awt.Color(255, 255, 255));
         card12.setEnabled(false);
+        card12.setFocusable(false);
         card12.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card12ActionPerformed(evt);
@@ -160,6 +184,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card17.setBackground(new java.awt.Color(255, 255, 255));
         card17.setEnabled(false);
+        card17.setFocusable(false);
         card17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card17ActionPerformed(evt);
@@ -168,6 +193,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card8.setBackground(new java.awt.Color(255, 255, 255));
         card8.setEnabled(false);
+        card8.setFocusable(false);
         card8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card8ActionPerformed(evt);
@@ -176,6 +202,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card13.setBackground(new java.awt.Color(255, 255, 255));
         card13.setEnabled(false);
+        card13.setFocusable(false);
         card13.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card13ActionPerformed(evt);
@@ -184,6 +211,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card18.setBackground(new java.awt.Color(255, 255, 255));
         card18.setEnabled(false);
+        card18.setFocusable(false);
         card18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card18ActionPerformed(evt);
@@ -192,6 +220,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card4.setBackground(new java.awt.Color(255, 255, 255));
         card4.setEnabled(false);
+        card4.setFocusable(false);
         card4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card4ActionPerformed(evt);
@@ -200,6 +229,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card3.setBackground(new java.awt.Color(255, 255, 255));
         card3.setEnabled(false);
+        card3.setFocusable(false);
         card3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card3ActionPerformed(evt);
@@ -208,6 +238,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card9.setBackground(new java.awt.Color(255, 255, 255));
         card9.setEnabled(false);
+        card9.setFocusable(false);
         card9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card9ActionPerformed(evt);
@@ -216,6 +247,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card19.setBackground(new java.awt.Color(255, 255, 255));
         card19.setEnabled(false);
+        card19.setFocusable(false);
         card19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card19ActionPerformed(evt);
@@ -224,6 +256,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card14.setBackground(new java.awt.Color(255, 255, 255));
         card14.setEnabled(false);
+        card14.setFocusable(false);
         card14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card14ActionPerformed(evt);
@@ -232,6 +265,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card10.setBackground(new java.awt.Color(255, 255, 255));
         card10.setEnabled(false);
+        card10.setFocusable(false);
         card10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card10ActionPerformed(evt);
@@ -240,6 +274,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card15.setBackground(new java.awt.Color(255, 255, 255));
         card15.setEnabled(false);
+        card15.setFocusable(false);
         card15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card15ActionPerformed(evt);
@@ -248,6 +283,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card20.setBackground(new java.awt.Color(255, 255, 255));
         card20.setEnabled(false);
+        card20.setFocusable(false);
         card20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card20ActionPerformed(evt);
@@ -256,6 +292,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
 
         card5.setBackground(new java.awt.Color(255, 255, 255));
         card5.setEnabled(false);
+        card5.setFocusable(false);
         card5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 card5ActionPerformed(evt);
@@ -267,6 +304,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
         playBTN.setForeground(new java.awt.Color(0, 0, 0));
         playBTN.setText("Play");
         playBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        playBTN.setFocusable(false);
         playBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 playBTNActionPerformed(evt);
@@ -277,6 +315,7 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
         exitBTN.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         exitBTN.setForeground(new java.awt.Color(0, 0, 0));
         exitBTN.setText("Exit");
+        exitBTN.setFocusable(false);
         exitBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitBTNActionPerformed(evt);
@@ -417,49 +456,24 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if(animCount == 20) {
-            startingAnim.stop();
-            outputBox.setText("Pick your first card!");
-            return;
-        }
-        outputBox.setText("Shuffling...");
-        cardList.get(animCount).setIcon(CARDBACK);
-        animCount++;
-    }
     
     private void playBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playBTNActionPerformed
-        
+        // Puts all cards into list of cards.
         cardList = new ArrayList<>(Arrays.asList(card1, card6, card11, card16, card17, card18, card19, card20, card15, card10, card5, card4, card3, card2, card7, card12, card13, card14, card9, card8));
         // Shuffles the deck.
         Collections.shuffle(cardShuffle);
-        cardToIcon.put(card1, cardShuffle.get(0));
-        cardToIcon.put(card2, cardShuffle.get(1));
-        cardToIcon.put(card3, cardShuffle.get(2));
-        cardToIcon.put(card4, cardShuffle.get(3));
-        cardToIcon.put(card5, cardShuffle.get(4));
-        cardToIcon.put(card6, cardShuffle.get(5));
-        cardToIcon.put(card7, cardShuffle.get(6));
-        cardToIcon.put(card8, cardShuffle.get(7));
-        cardToIcon.put(card9, cardShuffle.get(8));
-        cardToIcon.put(card10, cardShuffle.get(9));
-        cardToIcon.put(card11, cardShuffle.get(10));
-        cardToIcon.put(card12, cardShuffle.get(11));
-        cardToIcon.put(card13, cardShuffle.get(12));
-        cardToIcon.put(card14, cardShuffle.get(13));
-        cardToIcon.put(card15, cardShuffle.get(14));
-        cardToIcon.put(card16, cardShuffle.get(15));
-        cardToIcon.put(card17, cardShuffle.get(16));
-        cardToIcon.put(card18, cardShuffle.get(17));
-        cardToIcon.put(card19, cardShuffle.get(18));
-        cardToIcon.put(card20, cardShuffle.get(19));
         
-        cardList.forEach((button) -> {
-            button.setEnabled(true);
+        // For each card: put the card and its shuffled icon into hashmap
+        // Reset icon
+        // Enable the card
+        cardList.forEach((card) -> {
+            cardToIcon.put(card, cardShuffle.get(cardList.indexOf(card)));
+            card.setIcon(null);
+            card.setEnabled(true);
         });
+        // Plays the shuffling animation
         startingAnim.start();
-        
+
         isPlaying = true;
         playBTN.setEnabled(false);
         playBTN.setToolTipText("You are already playing!");   
@@ -469,18 +483,19 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
     private void exitBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBTNActionPerformed
         System.exit(0);
     }//GEN-LAST:event_exitBTNActionPerformed
-    
+
     private void cardSelected(JButton userPickedCard) {
+        // Adds picked card to the list of chosen cards.
         chosenCards.add(userPickedCard);
 
+        // If first chosen card, prompt the user to pick 2nd card.
         if(chosenCards.size() == 1) {
             outputBox.setText("Please pick your second card!");
+        // If second chosen card, determine:
         } else if (chosenCards.size() == 2) {
             // If user clicked same card again:
-            if(userPickedCard.equals(chosenCards.get(0))) {
+            if(chosenCards.get(1).equals(chosenCards.get(0))) {
                 chosenCards.get(0).setIcon(CARDBACK);
-                chosenCards.get(1).setIcon(CARDBACK);
-                
                 chosenCards.clear();
                 outputBox.setText("You picked the same card twice!");
                 return;
@@ -515,103 +530,104 @@ public class MatchingGame extends javax.swing.JFrame implements ActionListener{
     }
     
     private void card1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card1ActionPerformed
-        cardSelected(card1);
         card1.setIcon(cardToIcon.get(card1));
+        cardSelected(card1);
+
     }//GEN-LAST:event_card1ActionPerformed
 
     private void card2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card2ActionPerformed
-        cardSelected(card2);
         card2.setIcon(cardToIcon.get(card2));
+        cardSelected(card2);
     }//GEN-LAST:event_card2ActionPerformed
 
     private void card3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card3ActionPerformed
-        cardSelected(card3);
         card3.setIcon(cardToIcon.get(card3));
+        cardSelected(card3);
     }//GEN-LAST:event_card3ActionPerformed
 
     private void card4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card4ActionPerformed
-        cardSelected(card4);
         card4.setIcon(cardToIcon.get(card4));
+        cardSelected(card4);
     }//GEN-LAST:event_card4ActionPerformed
 
     private void card5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card5ActionPerformed
-        cardSelected(card5);
         card5.setIcon(cardToIcon.get(card5));
+        cardSelected(card5);
     }//GEN-LAST:event_card5ActionPerformed
 
     private void card6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card6ActionPerformed
-        cardSelected(card6);
         card6.setIcon(cardToIcon.get(card6));
+        cardSelected(card6);
     }//GEN-LAST:event_card6ActionPerformed
 
     private void card7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card7ActionPerformed
-        cardSelected(card7);
         card7.setIcon(cardToIcon.get(card7));
+        cardSelected(card7);
     }//GEN-LAST:event_card7ActionPerformed
 
     private void card8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card8ActionPerformed
-        cardSelected(card8);
         card8.setIcon(cardToIcon.get(card8));
+        cardSelected(card8);
     }//GEN-LAST:event_card8ActionPerformed
 
     private void card9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card9ActionPerformed
-        cardSelected(card9);
         card9.setIcon(cardToIcon.get(card9));
+        cardSelected(card9);
     }//GEN-LAST:event_card9ActionPerformed
 
     private void card10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card10ActionPerformed
-        cardSelected(card10);
         card10.setIcon(cardToIcon.get(card10));
+        cardSelected(card10);
     }//GEN-LAST:event_card10ActionPerformed
 
     private void card11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card11ActionPerformed
-        cardSelected(card11);
         card11.setIcon(cardToIcon.get(card11));
+        cardSelected(card11);
     }//GEN-LAST:event_card11ActionPerformed
 
     private void card12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card12ActionPerformed
-        cardSelected(card12);
         card12.setIcon(cardToIcon.get(card12));
+        cardSelected(card12);
     }//GEN-LAST:event_card12ActionPerformed
 
     private void card13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card13ActionPerformed
-        cardSelected(card13);
         card13.setIcon(cardToIcon.get(card13));
+        cardSelected(card13);
     }//GEN-LAST:event_card13ActionPerformed
 
     private void card14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card14ActionPerformed
-        cardSelected(card14);
         card14.setIcon(cardToIcon.get(card14));
+        cardSelected(card14);
     }//GEN-LAST:event_card14ActionPerformed
 
     private void card15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card15ActionPerformed
-        cardSelected(card15);
         card15.setIcon(cardToIcon.get(card15));
+        cardSelected(card15);
     }//GEN-LAST:event_card15ActionPerformed
 
     private void card16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card16ActionPerformed
-        cardSelected(card16);
         card16.setIcon(cardToIcon.get(card16));
+        cardSelected(card16);
     }//GEN-LAST:event_card16ActionPerformed
 
     private void card17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card17ActionPerformed
-        cardSelected(card17);
         card17.setIcon(cardToIcon.get(card17));
+        cardSelected(card17);
     }//GEN-LAST:event_card17ActionPerformed
 
     private void card18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card18ActionPerformed
-        cardSelected(card18);
         card18.setIcon(cardToIcon.get(card18));
+        cardSelected(card18);
     }//GEN-LAST:event_card18ActionPerformed
 
     private void card19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card19ActionPerformed
-        cardSelected(card19);
         card19.setIcon(cardToIcon.get(card19));
+        cardSelected(card19);
     }//GEN-LAST:event_card19ActionPerformed
 
     private void card20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card20ActionPerformed
-        cardSelected(card20);
         card20.setIcon(cardToIcon.get(card20));
+        cardSelected(card20);
     }//GEN-LAST:event_card20ActionPerformed
 
     /**
