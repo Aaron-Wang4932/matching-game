@@ -18,6 +18,9 @@ import java.util.Collections;
  *
  * @author peixi
  */
+// To-do: make timer only work on 2nd click
+// first click should not trigger timer
+// have check for first click within button method instead of within actual dedicated checking method
 public class MatchingGame extends javax.swing.JFrame{
     // ICONS:
     static final ImageIcon TITLE = new ImageIcon("resources/title.png");
