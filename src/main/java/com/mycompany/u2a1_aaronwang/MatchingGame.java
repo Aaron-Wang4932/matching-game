@@ -46,6 +46,7 @@ public class MatchingGame extends javax.swing.JFrame{
             if(curCard == 20) {
                 startingAnim.stop();
                 outputBox.setText("Pick your first card!");
+                curCard = 0;
                 return;
             }
         outputBox.setText("Shuffling...");
@@ -54,11 +55,18 @@ public class MatchingGame extends javax.swing.JFrame{
         }
     };
     Timer startingAnim = new Timer(75, startingAnimListener);
+    
     // Card Flip Timer:
-    ActionListener cardFlipListener;
-    Timer cardFlip = new Timer(2000, cardFlipListener);
+    ActionListener cardFlipListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                cardSelected(curCard);
+            }
+        };
+    Timer cardFlip = new Timer(750, cardFlipListener);
     
     // Info:
+    static JButton curCard;
     static ArrayList<JButton> chosenCards = new ArrayList<>();
     int numMatched = 0;
     static boolean isPlaying = false;
@@ -531,103 +539,163 @@ public class MatchingGame extends javax.swing.JFrame{
     
     private void card1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card1ActionPerformed
         card1.setIcon(cardToIcon.get(card1));
-        cardSelected(card1);
+        curCard = card1;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
 
     }//GEN-LAST:event_card1ActionPerformed
 
     private void card2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card2ActionPerformed
         card2.setIcon(cardToIcon.get(card2));
-        cardSelected(card2);
+        curCard = card2;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card2ActionPerformed
 
     private void card3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card3ActionPerformed
         card3.setIcon(cardToIcon.get(card3));
-        cardSelected(card3);
+        curCard = card3;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card3ActionPerformed
 
     private void card4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card4ActionPerformed
         card4.setIcon(cardToIcon.get(card4));
-        cardSelected(card4);
+        curCard = card4;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card4ActionPerformed
 
     private void card5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card5ActionPerformed
         card5.setIcon(cardToIcon.get(card5));
-        cardSelected(card5);
+        curCard = card5;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card5ActionPerformed
 
     private void card6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card6ActionPerformed
         card6.setIcon(cardToIcon.get(card6));
-        cardSelected(card6);
+        curCard = card6;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card6ActionPerformed
 
     private void card7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card7ActionPerformed
         card7.setIcon(cardToIcon.get(card7));
-        cardSelected(card7);
+        curCard = card7;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card7ActionPerformed
 
     private void card8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card8ActionPerformed
         card8.setIcon(cardToIcon.get(card8));
-        cardSelected(card8);
+        curCard = card8;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card8ActionPerformed
 
     private void card9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card9ActionPerformed
         card9.setIcon(cardToIcon.get(card9));
-        cardSelected(card9);
+        curCard = card9;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card9ActionPerformed
 
     private void card10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card10ActionPerformed
         card10.setIcon(cardToIcon.get(card10));
-        cardSelected(card10);
+        curCard = card10;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card10ActionPerformed
 
     private void card11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card11ActionPerformed
         card11.setIcon(cardToIcon.get(card11));
-        cardSelected(card11);
+        curCard = card11;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card11ActionPerformed
 
     private void card12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card12ActionPerformed
         card12.setIcon(cardToIcon.get(card12));
-        cardSelected(card12);
+        curCard = card12;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card12ActionPerformed
 
     private void card13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card13ActionPerformed
         card13.setIcon(cardToIcon.get(card13));
-        cardSelected(card13);
+        curCard = card13;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card13ActionPerformed
 
     private void card14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card14ActionPerformed
         card14.setIcon(cardToIcon.get(card14));
-        cardSelected(card14);
+        curCard = card14;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card14ActionPerformed
 
     private void card15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card15ActionPerformed
         card15.setIcon(cardToIcon.get(card15));
-        cardSelected(card15);
+        curCard = card15;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card15ActionPerformed
 
     private void card16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card16ActionPerformed
         card16.setIcon(cardToIcon.get(card16));
-        cardSelected(card16);
+        curCard = card16;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card16ActionPerformed
 
     private void card17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card17ActionPerformed
         card17.setIcon(cardToIcon.get(card17));
-        cardSelected(card17);
+        curCard = card17;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card17ActionPerformed
 
     private void card18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card18ActionPerformed
         card18.setIcon(cardToIcon.get(card18));
-        cardSelected(card18);
+        curCard = card18;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card18ActionPerformed
 
     private void card19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card19ActionPerformed
         card19.setIcon(cardToIcon.get(card19));
-        cardSelected(card19);
+        curCard = card19;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card19ActionPerformed
 
     private void card20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card20ActionPerformed
         card20.setIcon(cardToIcon.get(card20));
-        cardSelected(card20);
+        curCard = card20;
+        if(chosenCards.size() == 0) cardFlip.setDelay(0);
+        cardFlip.setRepeats(false);
+        cardFlip.start();
     }//GEN-LAST:event_card20ActionPerformed
 
     /**
