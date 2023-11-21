@@ -46,10 +46,12 @@ public class MatchingGame extends javax.swing.JFrame{
         int curCard = 0;
         @Override
         public void actionPerformed(ActionEvent evt) {
+            isDecidingOutcome = true;
             if(curCard == 20) {
                 startingAnim.stop();
                 outputBox.setText("Pick your first card!");
                 curCard = 0;
+                isDecidingOutcome = false;
                 return;
             }
         outputBox.setText("Shuffling...");
@@ -57,23 +59,29 @@ public class MatchingGame extends javax.swing.JFrame{
         curCard++;
         }
     };
-    Timer startingAnim = new Timer(75, startingAnimListener);
+    Timer startingAnim = new Timer(50, startingAnimListener);
     
-    // Card Flip Timer:
-    ActionListener cardFlipListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent evt) {
-                cardSelected(curCard);
+    ActionListener endingAnimListener = new ActionListener() {
+        int curCard = 0;
+        @Override
+        public void actionPerformed(ActionEvent evt) {
+            if(curCard == 20) {
+                startingAnim.stop();
+                curCard = 0;
+                return;
             }
-        };
-    Timer cardFlip = new Timer(750, cardFlipListener);
+        cardList.get(curCard).setEnabled(true);
+        curCard++;
+        }
+    };
+    Timer endingAnim = new Timer(50, endingAnimListener);
+    
+    
     
     // Info:
-    static JButton curCard;
     static ArrayList<JButton> chosenCards = new ArrayList<>();
     int numMatched = 0;
-    static boolean isPlaying = false;
-    static boolean hasWon = false;
+    static boolean isDecidingOutcome = false;
 
     /**
      * Creates new form MatchingGame
@@ -469,11 +477,11 @@ public class MatchingGame extends javax.swing.JFrame{
 
     
     private void playBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playBTNActionPerformed
-        // Puts all cards into list of cards.
+
+        // Puts all cards into list of cards, with order for animation!
         cardList = new ArrayList<>(Arrays.asList(card1, card6, card11, card16, card17, card18, card19, card20, card15, card10, card5, card4, card3, card2, card7, card12, card13, card14, card9, card8));
         // Shuffles the deck.
         Collections.shuffle(cardShuffle);
-        
         // For each card: put the card and its shuffled icon into hashmap
         // Reset icon
         // Enable the card
@@ -484,8 +492,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
         // Plays the shuffling animation
         startingAnim.start();
-
-        isPlaying = true;
+        // Disable play button
         playBTN.setEnabled(false);
         playBTN.setToolTipText("You are already playing!");   
 
@@ -495,210 +502,146 @@ public class MatchingGame extends javax.swing.JFrame{
         System.exit(0);
     }//GEN-LAST:event_exitBTNActionPerformed
 
-    private void cardSelected(JButton userPickedCard) {
-        // Adds picked card to the list of chosen cards.
-        chosenCards.add(userPickedCard);
-
-        // If first chosen card, prompt the user to pick 2nd card.
+    private void cardLogic(JButton pickedCard) {
+        // If pending outcome (eg. not unflipping cards just yet for user memorization), block further button inputs.
+        if(isDecidingOutcome) return;
+        // Add this picked card to the list of chosen cards, and set that card's icon.
+        chosenCards.add(pickedCard);
+        pickedCard.setIcon(cardToIcon.get(pickedCard));
+        
+        // If this is the first picked card, prompt the user to pick another.
         if(chosenCards.size() == 1) {
-            outputBox.setText("Please pick your second card!");
-        // If second chosen card, determine:
-        } else if (chosenCards.size() == 2) {
-            // If user clicked same card again:
-            if(chosenCards.get(1).equals(chosenCards.get(0))) {
-                chosenCards.get(0).setIcon(CARDBACK);
-                chosenCards.clear();
-                outputBox.setText("You picked the same card twice!");
+            outputBox.setText("Pick another card.");
+        } else {
+            // If user picks the same card again, allow them to pick another.
+            if(chosenCards.get(0).equals(chosenCards.get(1))) {
+                chosenCards.remove(1);
+                outputBox.setText("Pick a different card.");
                 return;
             }
-            // If the two file paths are equal, the cards match. ImageIcon.toString() returns its filepath.
+            // If string representations of the file paths are equal, the two cards are matching.
             if(cardToIcon.get(chosenCards.get(0)).toString().equals(cardToIcon.get(chosenCards.get(1)).toString())) {
-                chosenCards.get(0).setEnabled(false);
-                chosenCards.get(1).setEnabled(false);
-                outputBox.setText("These two cards match!");
+                // Get the found eeveelution with fancy string shenanigans.
+                String foundEeveelution = cardToIcon.get(chosenCards.get(0)).toString()
+                                                    .replace("resources/", "")
+                                                    .replace(".png","");
+                foundEeveelution = foundEeveelution.substring(0, 1).toUpperCase() + foundEeveelution.substring(1);
+                if(foundEeveelution.equalsIgnoreCase("eevee-gmax")) foundEeveelution = "GMAX Eevee";
+                
+                // Disable the found cards.
+                chosenCards.forEach(card -> card.setEnabled(false));
+                outputBox.setText("Congrats, you found " + foundEeveelution + "!");
                 chosenCards.clear();
-                numMatched++;
-                if(numMatched == 10) {
-                    performUponWin();
-                }
+                // Winner! Gagner!
+                if(++numMatched == 10) performUponWin();
             } else {
-                outputBox.setText("These two cards do not match!");
-                chosenCards.forEach((card) -> {
-                    card.setEnabled(true);
-                    System.out.println(cardToIcon.get(card).toString());
-                    card.setIcon(CARDBACK);
-                });
-                chosenCards.clear();
+                // Block further input
+                isDecidingOutcome = true;
+                outputBox.setText("These cards do not match.");
+                // Creates a new action listener to revert isDecidingOutcome, clear list, and flip back.
+                ActionListener flipTimerListener = new ActionListener() {
+                    public void actionPerformed(ActionEvent evt) {
+                        chosenCards.forEach(card -> card.setIcon(CARDBACK));
+                        isDecidingOutcome = false;
+                        chosenCards.clear();
+                    }
+                };
+                // 1350ms = 1.35s delay before doing so.
+                Timer flipTimer = new Timer(1350, flipTimerListener);
+                flipTimer.setRepeats(false);
+                flipTimer.start();
             }
         }
     }
     
+    // Reset statistics
     private void performUponWin() {
+        endingAnim.start();
         numMatched = 0;
-        outputBox.setText("You win! Play again?");
-        playBTN.setToolTipText(null);
+        isDecidingOutcome = true;
         playBTN.setEnabled(true);
+        playBTN.setToolTipText(null);
+        outputBox.setText("You win! Play again?");
     }
     
     private void card1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card1ActionPerformed
-        card1.setIcon(cardToIcon.get(card1));
-        curCard = card1;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
-
+        cardLogic(card1);
     }//GEN-LAST:event_card1ActionPerformed
 
     private void card2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card2ActionPerformed
-        card2.setIcon(cardToIcon.get(card2));
-        curCard = card2;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card2);
     }//GEN-LAST:event_card2ActionPerformed
 
     private void card3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card3ActionPerformed
-        card3.setIcon(cardToIcon.get(card3));
-        curCard = card3;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card3);
     }//GEN-LAST:event_card3ActionPerformed
 
     private void card4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card4ActionPerformed
-        card4.setIcon(cardToIcon.get(card4));
-        curCard = card4;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card4);
     }//GEN-LAST:event_card4ActionPerformed
 
     private void card5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card5ActionPerformed
-        card5.setIcon(cardToIcon.get(card5));
-        curCard = card5;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card5);
     }//GEN-LAST:event_card5ActionPerformed
 
     private void card6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card6ActionPerformed
-        card6.setIcon(cardToIcon.get(card6));
-        curCard = card6;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card6);
     }//GEN-LAST:event_card6ActionPerformed
 
     private void card7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card7ActionPerformed
-        card7.setIcon(cardToIcon.get(card7));
-        curCard = card7;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card7);
     }//GEN-LAST:event_card7ActionPerformed
 
     private void card8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card8ActionPerformed
-        card8.setIcon(cardToIcon.get(card8));
-        curCard = card8;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card8);
     }//GEN-LAST:event_card8ActionPerformed
 
     private void card9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card9ActionPerformed
-        card9.setIcon(cardToIcon.get(card9));
-        curCard = card9;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card9);
     }//GEN-LAST:event_card9ActionPerformed
 
     private void card10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card10ActionPerformed
-        card10.setIcon(cardToIcon.get(card10));
-        curCard = card10;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card10);
     }//GEN-LAST:event_card10ActionPerformed
 
     private void card11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card11ActionPerformed
-        card11.setIcon(cardToIcon.get(card11));
-        curCard = card11;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card11);
     }//GEN-LAST:event_card11ActionPerformed
 
     private void card12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card12ActionPerformed
-        card12.setIcon(cardToIcon.get(card12));
-        curCard = card12;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card12);
     }//GEN-LAST:event_card12ActionPerformed
 
     private void card13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card13ActionPerformed
-        card13.setIcon(cardToIcon.get(card13));
-        curCard = card13;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card13);
     }//GEN-LAST:event_card13ActionPerformed
 
     private void card14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card14ActionPerformed
-        card14.setIcon(cardToIcon.get(card14));
-        curCard = card14;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card14);
     }//GEN-LAST:event_card14ActionPerformed
 
     private void card15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card15ActionPerformed
-        card15.setIcon(cardToIcon.get(card15));
-        curCard = card15;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card15);
     }//GEN-LAST:event_card15ActionPerformed
 
     private void card16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card16ActionPerformed
-        card16.setIcon(cardToIcon.get(card16));
-        curCard = card16;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card16);
     }//GEN-LAST:event_card16ActionPerformed
 
     private void card17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card17ActionPerformed
-        card17.setIcon(cardToIcon.get(card17));
-        curCard = card17;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card17);
     }//GEN-LAST:event_card17ActionPerformed
 
     private void card18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card18ActionPerformed
-        card18.setIcon(cardToIcon.get(card18));
-        curCard = card18;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card18);
     }//GEN-LAST:event_card18ActionPerformed
 
     private void card19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card19ActionPerformed
-        card19.setIcon(cardToIcon.get(card19));
-        curCard = card19;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card19);
     }//GEN-LAST:event_card19ActionPerformed
 
     private void card20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card20ActionPerformed
-        card20.setIcon(cardToIcon.get(card20));
-        curCard = card20;
-        if(chosenCards.isEmpty()) {cardFlip.setDelay(0);}
-        cardFlip.setRepeats(false);
-        cardFlip.start();
+        cardLogic(card20);
     }//GEN-LAST:event_card20ActionPerformed
 
     /**
