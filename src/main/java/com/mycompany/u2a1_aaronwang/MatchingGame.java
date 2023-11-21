@@ -4,23 +4,17 @@
  */
 package com.mycompany.u2a1_aaronwang;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.Timer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Arrays;
 import java.util.Collections;
 
-/**
- *
- * @author peixi
- */
-// To-do: make timer only work on 2nd click
-// first click should not trigger timer
-// have check for first click within button method instead of within actual dedicated checking method
+
 public class MatchingGame extends javax.swing.JFrame{
     // ICONS:
     static final ImageIcon TITLE = new ImageIcon("resources/title.png");
@@ -46,37 +40,20 @@ public class MatchingGame extends javax.swing.JFrame{
         int curCard = 0;
         @Override
         public void actionPerformed(ActionEvent evt) {
-            isDecidingOutcome = true;
             if(curCard == 20) {
-                startingAnim.stop();
-                outputBox.setText("Pick your first card!");
-                curCard = 0;
                 isDecidingOutcome = false;
+                curCard = 0;
+                outputBox.setText("Pick your first card!");
+                startingAnim.stop();
                 return;
             }
+        isDecidingOutcome = true;
         outputBox.setText("Shuffling...");
         cardList.get(curCard).setIcon(CARDBACK);
         curCard++;
         }
     };
     Timer startingAnim = new Timer(50, startingAnimListener);
-    
-    ActionListener endingAnimListener = new ActionListener() {
-        int curCard = 0;
-        @Override
-        public void actionPerformed(ActionEvent evt) {
-            if(curCard == 20) {
-                startingAnim.stop();
-                curCard = 0;
-                return;
-            }
-        cardList.get(curCard).setEnabled(true);
-        curCard++;
-        }
-    };
-    Timer endingAnim = new Timer(50, endingAnimListener);
-    
-    
     
     // Info:
     static ArrayList<JButton> chosenCards = new ArrayList<>();
@@ -139,6 +116,7 @@ public class MatchingGame extends javax.swing.JFrame{
         jLabel1.setText("Find That Eeveelution!");
 
         card1.setBackground(new java.awt.Color(255, 255, 255));
+        card1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card1.setEnabled(false);
         card1.setFocusable(false);
         card1.addActionListener(new java.awt.event.ActionListener() {
@@ -148,6 +126,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card6.setBackground(new java.awt.Color(255, 255, 255));
+        card6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card6.setEnabled(false);
         card6.setFocusable(false);
         card6.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +136,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card11.setBackground(new java.awt.Color(255, 255, 255));
+        card11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card11.setEnabled(false);
         card11.setFocusable(false);
         card11.addActionListener(new java.awt.event.ActionListener() {
@@ -166,6 +146,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card7.setBackground(new java.awt.Color(255, 255, 255));
+        card7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card7.setEnabled(false);
         card7.setFocusable(false);
         card7.addActionListener(new java.awt.event.ActionListener() {
@@ -175,6 +156,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card16.setBackground(new java.awt.Color(255, 255, 255));
+        card16.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card16.setEnabled(false);
         card16.setFocusable(false);
         card16.addActionListener(new java.awt.event.ActionListener() {
@@ -184,6 +166,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card2.setBackground(new java.awt.Color(255, 255, 255));
+        card2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card2.setEnabled(false);
         card2.setFocusable(false);
         card2.addActionListener(new java.awt.event.ActionListener() {
@@ -193,6 +176,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card12.setBackground(new java.awt.Color(255, 255, 255));
+        card12.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card12.setEnabled(false);
         card12.setFocusable(false);
         card12.addActionListener(new java.awt.event.ActionListener() {
@@ -202,6 +186,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card17.setBackground(new java.awt.Color(255, 255, 255));
+        card17.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card17.setEnabled(false);
         card17.setFocusable(false);
         card17.addActionListener(new java.awt.event.ActionListener() {
@@ -211,6 +196,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card8.setBackground(new java.awt.Color(255, 255, 255));
+        card8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card8.setEnabled(false);
         card8.setFocusable(false);
         card8.addActionListener(new java.awt.event.ActionListener() {
@@ -220,6 +206,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card13.setBackground(new java.awt.Color(255, 255, 255));
+        card13.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card13.setEnabled(false);
         card13.setFocusable(false);
         card13.addActionListener(new java.awt.event.ActionListener() {
@@ -229,6 +216,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card18.setBackground(new java.awt.Color(255, 255, 255));
+        card18.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card18.setEnabled(false);
         card18.setFocusable(false);
         card18.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +226,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card4.setBackground(new java.awt.Color(255, 255, 255));
+        card4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card4.setEnabled(false);
         card4.setFocusable(false);
         card4.addActionListener(new java.awt.event.ActionListener() {
@@ -247,6 +236,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card3.setBackground(new java.awt.Color(255, 255, 255));
+        card3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card3.setEnabled(false);
         card3.setFocusable(false);
         card3.addActionListener(new java.awt.event.ActionListener() {
@@ -256,6 +246,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card9.setBackground(new java.awt.Color(255, 255, 255));
+        card9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card9.setEnabled(false);
         card9.setFocusable(false);
         card9.addActionListener(new java.awt.event.ActionListener() {
@@ -265,6 +256,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card19.setBackground(new java.awt.Color(255, 255, 255));
+        card19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card19.setEnabled(false);
         card19.setFocusable(false);
         card19.addActionListener(new java.awt.event.ActionListener() {
@@ -274,6 +266,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card14.setBackground(new java.awt.Color(255, 255, 255));
+        card14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card14.setEnabled(false);
         card14.setFocusable(false);
         card14.addActionListener(new java.awt.event.ActionListener() {
@@ -283,6 +276,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card10.setBackground(new java.awt.Color(255, 255, 255));
+        card10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card10.setEnabled(false);
         card10.setFocusable(false);
         card10.addActionListener(new java.awt.event.ActionListener() {
@@ -292,6 +286,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card15.setBackground(new java.awt.Color(255, 255, 255));
+        card15.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card15.setEnabled(false);
         card15.setFocusable(false);
         card15.addActionListener(new java.awt.event.ActionListener() {
@@ -301,6 +296,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card20.setBackground(new java.awt.Color(255, 255, 255));
+        card20.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card20.setEnabled(false);
         card20.setFocusable(false);
         card20.addActionListener(new java.awt.event.ActionListener() {
@@ -310,6 +306,7 @@ public class MatchingGame extends javax.swing.JFrame{
         });
 
         card5.setBackground(new java.awt.Color(255, 255, 255));
+        card5.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         card5.setEnabled(false);
         card5.setFocusable(false);
         card5.addActionListener(new java.awt.event.ActionListener() {
@@ -322,7 +319,7 @@ public class MatchingGame extends javax.swing.JFrame{
         playBTN.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         playBTN.setForeground(new java.awt.Color(0, 0, 0));
         playBTN.setText("Play");
-        playBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        playBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         playBTN.setFocusable(false);
         playBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,6 +331,7 @@ public class MatchingGame extends javax.swing.JFrame{
         exitBTN.setFont(new java.awt.Font("Berlin Sans FB", 0, 14)); // NOI18N
         exitBTN.setForeground(new java.awt.Color(0, 0, 0));
         exitBTN.setText("Exit");
+        exitBTN.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exitBTN.setFocusable(false);
         exitBTN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -347,6 +345,9 @@ public class MatchingGame extends javax.swing.JFrame{
         outputBox.setForeground(new java.awt.Color(0, 0, 0));
         outputBox.setText("Press \"Play\" to begin!");
         outputBox.setFocusable(false);
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -457,7 +458,7 @@ public class MatchingGame extends javax.swing.JFrame{
                     .addComponent(playBTN)
                     .addComponent(exitBTN)
                     .addComponent(outputBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48))
+                .addGap(36, 36, 36))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -468,7 +469,7 @@ public class MatchingGame extends javax.swing.JFrame{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 446, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 440, Short.MAX_VALUE)
         );
 
         pack();
@@ -479,7 +480,10 @@ public class MatchingGame extends javax.swing.JFrame{
     private void playBTNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_playBTNActionPerformed
 
         // Puts all cards into list of cards, with order for animation!
-        cardList = new ArrayList<>(Arrays.asList(card1, card6, card11, card16, card17, card18, card19, card20, card15, card10, card5, card4, card3, card2, card7, card12, card13, card14, card9, card8));
+        if(cardList == null) {
+            cardList = new ArrayList<>(Arrays.asList(card1, card6, card11, card16, card17, card18, card19, card20, card15, card10, card5, card4, card3, card2, card7, card12, card13, card14, card9, card8));
+        }
+        
         // Shuffles the deck.
         Collections.shuffle(cardShuffle);
         // For each card: put the card and its shuffled icon into hashmap
@@ -537,17 +541,17 @@ public class MatchingGame extends javax.swing.JFrame{
             } else {
                 // Block further input
                 isDecidingOutcome = true;
-                outputBox.setText("These cards do not match.");
                 // Creates a new action listener to revert isDecidingOutcome, clear list, and flip back.
                 ActionListener flipTimerListener = new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
+                        outputBox.setText("These cards do not match.");
                         chosenCards.forEach(card -> card.setIcon(CARDBACK));
                         isDecidingOutcome = false;
                         chosenCards.clear();
                     }
                 };
-                // 1350ms = 1.35s delay before doing so.
-                Timer flipTimer = new Timer(1350, flipTimerListener);
+                // 1400ms = 1.4s delay before doing so.
+                Timer flipTimer = new Timer(1400, flipTimerListener);
                 flipTimer.setRepeats(false);
                 flipTimer.start();
             }
@@ -556,12 +560,13 @@ public class MatchingGame extends javax.swing.JFrame{
     
     // Reset statistics
     private void performUponWin() {
-        endingAnim.start();
+        cardList.forEach(card -> card.setEnabled(true));
         numMatched = 0;
         isDecidingOutcome = true;
         playBTN.setEnabled(true);
         playBTN.setToolTipText(null);
         outputBox.setText("You win! Play again?");
+        
     }
     
     private void card1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_card1ActionPerformed
